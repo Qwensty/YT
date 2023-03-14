@@ -2,11 +2,16 @@ import os
 import json
 from channel import Channel
 from video import Video, PLVideo
+from playlist import PlayList
 from googleapiclient.discovery import build
 
+pl = PlayList('PLguYHBi01DWr4bRWc4uaguASmo7lW4GCb')
+print(pl.title)
+print(pl.url)
 
-video1 = Video('9lO06Zxhu88')
-print(video1)
+duration = pl.total_duration
+print(duration)
+print(type(duration))
+print(duration.total_seconds())
+print(pl.show_best_video())
 
-video2 = PLVideo('BBotskuyw_M', 'PL7Ntiz7eTKwrqmApjln9u4ItzhDLRtPuD')
-print(video2)
