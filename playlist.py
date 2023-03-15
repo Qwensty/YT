@@ -3,18 +3,26 @@ import isodate
 from googleapiclient.discovery import build
 from video import Video
 from youtube_class_abstract import Youtube_class
-
+from config import api_key as key_for_youtube
 class PlayList(Youtube_class):
     """
     Класс PlayList, унаследован от абстрактного класса Youtube_class.
     """
 
     api_key = ""
+    videos = []
+
+    @classmethod
+    def set_api_key(cls):
+        """метод класса возвращает ключ для работы с youtube"""
+        cls.api_key = key_for_youtube
+        return cls.api_key
+
     @classmethod
     def get_service(cls):
-        api_key: str = os.getenv('API_KEY')
-        youtube = build('youtube', 'v3', developerKey=api_key)
-        return youtube
+        """метод класса возвращает объект для работы с youtube"""
+        with build('youtube', 'v3', developerKey=cls.api_key) as youtube:
+            return youtube
 
     def __init__(self, playlist_id: str) -> None:
         """
@@ -84,5 +92,3 @@ class PlayList(Youtube_class):
             duration = isodate.parse_duration(iso_8601_duration)
             duration_total += duration
         return duration_total
-
-
