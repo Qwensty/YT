@@ -30,13 +30,19 @@ class Video():
         - video_count - количество просмотров
         - video_likes - количество лайков
         """
-        video_response = self.youtube.videos().list(part='snippet,statistics', \
-                                                    id=self.video_id).execute()
-        self.video_title: str = video_response['items'][0]['snippet']['title']
-        self.view_count: int = video_response['items'][0]['statistics']['viewCount']
-        self.video_likes: int = video_response['items'][0]['statistics']['likeCount']
-        self.comment_count: int = video_response['items'][0]['statistics']['commentCount']
-
+        try:
+            video_response = self.youtube.videos().list(part='snippet,statistics', \
+                id=self.video_id).execute()
+            self.video_title: str = video_response['items'][0]['snippet']['title']
+            self.view_count: int = video_response['items'][0]['statistics']['viewCount']
+            self.video_likes: int = video_response['items'][0]['statistics']['likeCount']
+            self.comment_count: int = video_response['items'][0]['statistics']['commentCount']
+        except:
+            # загрузка видео по id не удалась
+            self.video_name = None
+            self.video_count = None
+            self.video_likes = None
+            self.video_title = None
     def __repr__(self):
 
         text = ""

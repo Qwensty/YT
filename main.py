@@ -5,13 +5,16 @@ from video import Video, PLVideo
 from playlist import PlayList
 from googleapiclient.discovery import build
 
-pl = PlayList('PLguYHBi01DWr4bRWc4uaguASmo7lW4GCb')
-print(pl.title)
-print(pl.url)
+def task6():
+    """Задание 6"""
+    broken_video = Video('broken_video_id')
+    print(broken_video.video_title)
+    print(broken_video.video_count)
 
-duration = pl.total_duration
-print(duration)
-print(type(duration))
-print(duration.total_seconds())
-print(pl.show_best_video())
+def main():
+    task6()
+
+
+if __name__ == "__main__":
+    main()
 
